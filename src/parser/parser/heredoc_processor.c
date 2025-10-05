@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_processor.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: maja <maja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 04:04:12 by tdietz-r          #+#    #+#             */
-/*   Updated: 2025/10/05 16:37:42 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/10/05 19:33:03 by maja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,6 @@ char	*handle_heredoc(char *delimiter, int delimiter_quoted, t_shell_ctx *ctx)
 	hdoc.delimiter_quoted = delimiter_quoted;
 	hdoc.ctx = ctx;
 	heredoc_read_loop(&hdoc);
-	close(hdoc.fd);
-	unlink(temp_filename);
-	return (temp_filename);
+    close(hdoc.fd);
+    return (temp_filename);
 }

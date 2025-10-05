@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_validation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdietz-r <tdietz-r@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: maja <maja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 18:36:09 by tdietztp          #+#    #+#             */
-/*   Updated: 2025/10/05 14:03:22 by tdietz-r         ###   ########.fr       */
+/*   Updated: 2025/10/05 19:10:43 by maja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,27 +158,7 @@ bool	validate_redirection_end(t_token_list *tokens)
 /// @return
 bool	validate_invalid_chars(t_token_list *tokens)
 {
-	t_token	*current;
-
-	if (!tokens || !tokens->head)
-		return (false);
-	current = tokens->head;
-	while (current)
-	{
-		if (current->token == TOKEN_WORD)
-		{
-			if (current->value && (ft_strncmp(current->value, "~", 2) == 0
-					|| ft_strncmp(current->value, "/", 2) == 0))
-			{
-				ft_putstr_fd("minishell: syntax error near unexpected token \'",
-					2);
-				ft_putstr_fd(current->value, 2);
-				ft_putstr_fd("\'\n", 2);
-				return (false);
-			}
-		}
-		current = current->next;
-	}
+	(void)tokens;
 	return (true);
 }
 

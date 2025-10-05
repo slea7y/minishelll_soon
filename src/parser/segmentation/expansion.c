@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: maja <maja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 21:40:17 by tdietz-r          #+#    #+#             */
-/*   Updated: 2025/10/05 16:39:38 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/10/05 19:10:43 by maja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,12 @@ static void	process_remaining_text(t_segment *segment, char **final_str,
 /// @param data
 static void	process_expansions(t_segment *segment, t_expansion_data *data)
 {
-	while (segment->value[*data->i])
-	{
-		if (segment->value[*data->i] == '~' && segment->type != SEG_SINGLE_QUOTE
-			&& (*data->i == 0 || ft_strchr(" \t\n", segment->value[*data->i
-						- 1])))
-			handle_tilde_expansion(segment, data);
+    while (segment->value[*data->i])
+    {
+        if (segment->value[*data->i] == '~' && segment->type == SEG_NORMAL_QUOTE
+            && (*data->i == 0 || ft_strchr(" \t\n", segment->value[*data->i
+                        - 1])))
+            handle_tilde_expansion(segment, data);
 		else if (segment->value[*data->i] == '$'
 			&& segment->type != SEG_SINGLE_QUOTE && segment->value[*data->i
 				+ 1] != '\0')
