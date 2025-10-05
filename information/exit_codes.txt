@@ -1,0 +1,46 @@
+  ╔═══════════════════════════════════════════════════════════════════════════════════╗
+  ║                              ⚠️  EXIT CODES REFERENCE ⚠️                            ║
+  ║                         TO debugg waaaay better. pls follow puki                  ║
+  ╚═══════════════════════════════════════════════════════════════════════════════════╝
+
+NORM how to call exit_fct:
+ int	exit_fct(int exit_value, char str)
+
+ first argument:
+ error value (easy lol)
+
+ second argument:
+ string with "what happend, which function, extra info..."
+ e.g.  "Mallocfail, split_tokens, token_array"
+
+complete call example:
+exit_fct(1, "Mallocfail, split_tokens, token_array")
+
+
+Exit Codes:
+
+0: Success = echo "HEllo" (Command executed successfully)
+
+1: General Error = cat hello (File or operation failed)
+
+2: Misuse of shell builtins =
+    bash-3.2$ exit 2
+    exit
+    [~/42/minishell(dreule)]$ echo $?
+    2
+    [~/42/minishell(dreule)]$ (A shell builtin was used with incorrect syntax or arguments)
+
+126: Command found, but not executable =
+    bash-3.2$ touch testfile
+    bash-3.2$ chmod -x testfile
+    bash-3.2$ ./testfile
+    bash: ./testfile: Permission denied
+    bash-3.2$ echo $?
+    126
+    bash-3.2$ (The file exists but lacks execution permissions)
+
+127: Command not found = ct hello (The command does not exist in the system or is not in the PATH)
+
+130: Script terminated by Ctrl+C = sleep 10 then Ctrl+C (Process was manually interrupted)
+
+258: Syntax Error = echo "Hello World <--- open Quotes" (Syntax error in the command, e.g., missing closing quotes)

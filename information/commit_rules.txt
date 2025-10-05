@@ -1,0 +1,49 @@
+- Commit messages
+    
+    Affected area, e.g., parsing, i.e., FEAT(parsing): <Explanation of the commit>
+    
+    - ADD() —> new folder/file
+    - FEAT() —> Add new feature
+    - FIX() —> Bug fix
+    - NORM() —> Changes that do not affect meaning of code, for example Norm
+    - BUILD() —> Frame, architecture of Project
+    - CHORE() —> Boring changes, that had to be done
+    - REVERT() —> Revert a previous commit
+    
+    Example:
+    
+    FEAT(execution): Add execution frame for Buildins etc…
+    
+
+
+How to change something for all;
+
+go to master branch:
+git checkout master
+
+
+
+pull latest version:
+git pull origin master
+
+Do ur stuff and add File by File!!!
+eg. git add Makefile
+eg. git add main.c
+
+git commit with norm;
+
+git push to origin master:
+git push origin master
+
+
+Then go to your own branch-> git checkout branchname -> git pull origin master
+
+
+
+git hub branches visualastion:
+
+git log --all --topo-order --graph --show-signature
+
+
+
+https://foregoing-loan-6f5.notion.site/Minishell-75e85da6eec74129b14eac810c01c686

@@ -1,0 +1,29 @@
+
+
+meta-struct based on linked list. 
+check Notion page or just see visualastion on link:
+
+https://www.canva.com/design/DAGh0abRBHY/QCTse6aXa7fvBwuWyabDIw/edit
+
+
+linked list for redirections "<,<<,>,>>"
+typedef struct s_file_node
+{
+	char				        *filename; 			(Holding the name of the redirected file.)
+	int					        redir_type; 		(Holding the value of the operator (<, <<, >, >>).)
+	struct s_file_node	*next;						The pointer to its next node in the list.
+}	t_file_node;
+
+
+
+
+linked list for commands and arguments "ls, -l, echo,..."
+typedef struct s_cmd_node
+{
+	int					      cmd_type;				 Specifies the type of command (pipe, built-in, …).
+	char				      **cmd;				Array of strings representing the command and its arguments (e.g., {"ls", "-l", NULL}).
+	t_file_list			  *files;					A pointer to the t_file_list meta-struct.
+	struct s_cmd_node	*next;						The pointer to its next node in the list.
+}	t_cmd_node;
+
+
