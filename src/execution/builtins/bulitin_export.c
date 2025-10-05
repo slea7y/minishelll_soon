@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bulitin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maja <maja@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 22:00:01 by majkijew          #+#    #+#             */
-/*   Updated: 2025/10/05 19:22:33 by maja             ###   ########.fr       */
+/*   Updated: 2025/10/05 05:04:23 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	is_valid_identifier(char *args)
 		return (0);
 	if (!ft_isalpha(args[0]) && args[0] != '_')
 		return (0);
-	i = 1;
+	i = 0;
 	while (args[i] != '=' && args[i])
 	{
 		if (!ft_isalnum(args[i]) && args[i] != '_')

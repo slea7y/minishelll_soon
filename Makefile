@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maja <maja@student.42.fr>                  +#+  +:+       +#+         #
+#    By: tdietz-r <tdietz-r@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/20 22:35:15 by majkijew          #+#    #+#              #
-#    Updated: 2025/10/05 18:35:16 by maja             ###   ########.fr        #
+#    Updated: 2025/10/05 09:00:04 by tdietz-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,18 +61,8 @@ SRC = main.c cleanup.c\
 OBJS = $(SRC:%.c=$(OBJDIR)/%.o)
 
 CC = cc
-# Detect Homebrew readline (macOS) and add include/lib paths if available
-READLINE_PREFIX := $(shell brew --prefix readline 2>/dev/null)
-
-CFLAGS = -Wall -Wextra -Werror -I./Includes
-ifdef READLINE_PREFIX
-CFLAGS += -I$(READLINE_PREFIX)/include
-endif
-
+CFLAGS = -Wall -Wextra -Werror -I./includes
 LINKER = -lreadline
-ifdef READLINE_PREFIX
-LINKER += -L$(READLINE_PREFIX)/lib -lhistory -lcurses
-endif
 
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a

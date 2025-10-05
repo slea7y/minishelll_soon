@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maja <maja@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tdietz-r <tdietz-r@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 14:00:26 by tdietz-r          #+#    #+#             */
-/*   Updated: 2025/10/05 18:48:59 by maja             ###   ########.fr       */
+/*   Updated: 2025/10/05 14:07:23 by tdietz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 // Includes - Start
 # include <errno.h>
-# include <stdio.h>
+# include <readline/history.h>
+# include <readline/readline.h>
 # include <signal.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-# include <readline/history.h>
-# include <readline/readline.h>
 // # include "libft.h"
 // # include "parser.h"
 // # include "executor.h"

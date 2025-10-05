@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maja <maja@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 21:40:17 by tdietz-r          #+#    #+#             */
-/*   Updated: 2025/10/05 19:10:43 by maja             ###   ########.fr       */
+/*   Updated: 2025/10/05 19:04:28 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,12 @@ static void	process_remaining_text(t_segment *segment, char **final_str,
 /// @param data
 static void	process_expansions(t_segment *segment, t_expansion_data *data)
 {
-    while (segment->value[*data->i])
-    {
-        if (segment->value[*data->i] == '~' && segment->type == SEG_NORMAL_QUOTE
-            && (*data->i == 0 || ft_strchr(" \t\n", segment->value[*data->i
-                        - 1])))
-            handle_tilde_expansion(segment, data);
+	while (segment->value[*data->i])
+	{
+		if (segment->value[*data->i] == '~' && segment->type == SEG_NORMAL_QUOTE
+			&& (*data->i == 0 || ft_strchr(" \t\n", segment->value[*data->i
+						- 1])))
+			handle_tilde_expansion(segment, data);
 		else if (segment->value[*data->i] == '$'
 			&& segment->type != SEG_SINGLE_QUOTE && segment->value[*data->i
 				+ 1] != '\0')
@@ -109,7 +109,7 @@ static void	process_expansions(t_segment *segment, t_expansion_data *data)
 	}
 }
 
-// ok============PASSES MORE TEST BUT 
+// ok
 /// @brief controll fction expansionm ii
 /// @param segment
 /// @param ctx
@@ -141,4 +141,3 @@ void	expand_variables_in_segment(t_segment *segment, t_shell_ctx *ctx)
 	else
 		free(final_str);
 }
-

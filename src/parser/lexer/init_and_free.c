@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 18:09:10 by tdietz-r          #+#    #+#             */
-/*   Updated: 2025/10/05 12:57:29 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/10/05 18:18:08 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	free_segment_list(t_segment_list *seg_list)
 	while (current)
 	{
 		next = current->next;
+		free(current->value);
 		free(current);
 		current = next;
 	}

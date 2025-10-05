@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maja <maja@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: tdietz-r <tdietz-r@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 22:02:12 by tdietz-r          #+#    #+#             */
-/*   Updated: 2025/10/05 18:48:59 by maja             ###   ########.fr       */
+/*   Updated: 2025/10/05 14:07:16 by tdietz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,6 @@ int	main(int ac, char **av, char **envp)
 		}
 		main_loop(input, &ctx);
 	}
-	// rl_clear_history();
 	free_env_list(&env_list);
-	free(input);
 	return (ctx.last_exit_code);
 }

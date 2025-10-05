@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maja <maja@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 02:21:35 by tdietz-r          #+#    #+#             */
-/*   Updated: 2025/10/05 18:55:34 by maja             ###   ########.fr       */
+/*   Updated: 2025/10/05 18:56:10 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ void	handle_tilde_expansion(t_segment *segment, t_expansion_data *data)
 {
 	char	*before_tilde;
 	char	*home;
-    char	*temp;
-    char	*with_home;
+	char	*temp;
+	char	*with_home;
 
 	before_tilde = ft_substr(segment->value, *data->start, *data->i
 			- *data->start);
-    temp = ft_strjoin(*data->final_str, before_tilde);
-    free(*data->final_str);
-    home = get_env_value(data->ctx->env, "HOME");
-    free(before_tilde);
-    with_home = ft_strjoin(temp, home);
-    free(temp);
-    *data->final_str = with_home;
-    free(home);
+	temp = ft_strjoin(*data->final_str, before_tilde);
+	free(*data->final_str);
+	home = get_env_value(data->ctx->env, "HOME");
+	free(before_tilde);
+	with_home = ft_strjoin(temp, home);
+	free(temp);
+	*data->final_str = with_home;
+	free(home);
 	(*data->i)++;
 	*data->start = *data->i;
 }
@@ -93,7 +93,8 @@ static void	handle_dollar_variable(t_segment *segment, t_expansion_data *data)
 			(*data->i)++;
 		var_name = ft_substr(segment->value, *data->start, *data->i
 				- *data->start);
-        env_value = get_env_value(data->ctx->env, var_name);
+		env_value = get_env_value(data->ctx->env, var_name);
+
 		if (env_value)
 		{
 			temp = ft_strjoin(*data->final_str, env_value);
