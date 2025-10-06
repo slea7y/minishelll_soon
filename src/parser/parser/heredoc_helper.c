@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_helper.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdietz-r <tdietz-r@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 05:25:32 by tdietz-r          #+#    #+#             */
-/*   Updated: 2025/10/05 04:42:46 by tdietz-r         ###   ########.fr       */
+/*   Updated: 2025/10/06 02:05:23 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@
 /// @return
 char	*read_line_interactive(void)
 {
-	return (readline("> "));
+	char	*line;
+
+	write (1, "> ", 2);
+	line = get_next_line(STDIN_FILENO);
+	return (line);
 }
 
 // ok
@@ -40,8 +44,7 @@ char	*read_line_non_interactive(void)
 /// @return
 char	*read_heredoc_line(int is_interactive)
 {
-	if (is_interactive)
-		return (read_line_interactive());
+	(void)is_interactive;
 	return (read_line_non_interactive());
 }
 
@@ -64,7 +67,6 @@ int	write_line_to_file(int fd, char *line, int delimiter_quoted,
 	if (!expanded_line)
 		return (-1);
 	write(fd, expanded_line, ft_strlen(expanded_line));
-	write(fd, "\n", 1);
 	free(expanded_line);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tdietz-r <tdietz-r@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 18:33:43 by tdietz-r          #+#    #+#             */
-/*   Updated: 2025/10/05 08:53:53 by tdietz-r         ###   ########.fr       */
+/*   Updated: 2025/10/05 22:20:21 by tdietz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int	check_quoted_match(char **pos, char *delimiter)
 /// @param original_input the original command line input to search in
 /// @param delimiter the heredoc delimiter to look for
 /// @return 1 if delimiter is found quoted after '<<', 0 if not
-int	is_delimiter_quoted_in_original_input(char *original_input, char *delimiter)
+int	is_del_qu_in_org_input(char *original_input, char *delimiter)
 {
 	char	*pos;
 

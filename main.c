@@ -6,13 +6,16 @@
 /*   By: tdietz-r <tdietz-r@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 22:02:12 by tdietz-r          #+#    #+#             */
-/*   Updated: 2025/10/05 14:07:16 by tdietz-r         ###   ########.fr       */
+/*   Updated: 2025/10/05 22:38:02 by tdietz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Includes/executor.h"
 #include "Includes/minishell.h"
 #include "Includes/parser.h"
+
+int			handle_parser_error(t_cmd_list *cmds, t_token_list *tokens,
+				char *input, t_shell_ctx *ctx);
 
 static char	*get_input(void)
 {
@@ -36,19 +39,6 @@ static int	handle_lexer_error(t_token_list *tokens, char *input,
 	free_token_list(tokens);
 	free(input);
 	return (0);
-}
-
-int	handle_parser_error(t_cmd_list *cmds, t_token_list *tokens, char *input,
-		t_shell_ctx *ctx)
-{
-	ctx->last_exit_code = 2;
-	if (cmds)
-		free_cmd_list(cmds);
-	if (tokens)
-		free_token_list(tokens);
-	if (input)
-		free(input);
-	return (1);
 }
 
 static int	process_input(char *input, t_shell_ctx *ctx)

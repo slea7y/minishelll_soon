@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:08:44 by majkijew          #+#    #+#             */
-/*   Updated: 2025/10/05 04:05:06 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/10/06 01:31:52 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,32 +79,6 @@ int	ft_pwd(t_cmd_node *cmd, t_shell_ctx *ctx)
 	return (exit_code);
 }
 
-int	ft_env(t_cmd_node *cmd, t_shell_ctx *ctx)
-{
-	t_env_node	*current;
-	int			exit_code;
-
-	exit_code = 0;
-	current = ctx->env->head;
-	if (!ctx || !ctx->env)
-		return (1);
-	if (cmd->cmd[1])
-		return (exit_code);
-	current = ctx->env->head;
-	while (current)
-	{
-		if (current->value)
-		{
-			ft_putstr_fd(current->key, 1);
-			ft_putstr_fd("=", 1);
-			ft_putstr_fd(current->value, 1);
-			ft_putstr_fd("\n", 1);
-		}
-		current = current->next;
-	}
-	return (exit_code);
-}
-
 int	ft_exit(t_cmd_node *cmd, t_shell_ctx *ctx)
 {
 	int	exit_code;
@@ -121,7 +95,7 @@ int	ft_exit(t_cmd_node *cmd, t_shell_ctx *ctx)
 	if (!is_numeric(cmd->cmd[1]))
 	{
 		ft_putstr_fd("exit: numeric argument required\n", 2);
-		exit(255);
+		exit(2);
 	}
 	exit_code = ft_atoi(cmd->cmd[1]);
 	exit_code = exit_code % 256;

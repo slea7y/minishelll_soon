@@ -3,40 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: tdietz-r <tdietz-r@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 02:21:35 by tdietz-r          #+#    #+#             */
-/*   Updated: 2025/10/05 18:56:10 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/10/05 22:55:22 by tdietz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../Includes/parser.h"
-
-// ok
-/// @brief replaces ~ with homepath. cpy text before ~, find home env path,
-//	adds it
-/// @param segment
-/// @param data
-void	handle_tilde_expansion(t_segment *segment, t_expansion_data *data)
-{
-	char	*before_tilde;
-	char	*home;
-	char	*temp;
-	char	*with_home;
-
-	before_tilde = ft_substr(segment->value, *data->start, *data->i
-			- *data->start);
-	temp = ft_strjoin(*data->final_str, before_tilde);
-	free(*data->final_str);
-	home = get_env_value(data->ctx->env, "HOME");
-	free(before_tilde);
-	with_home = ft_strjoin(temp, home);
-	free(temp);
-	*data->final_str = with_home;
-	free(home);
-	(*data->i)++;
-	*data->start = *data->i;
-}
 
 // ok
 /// @brief cpys string after $ and between quotes in final_str.
@@ -67,6 +41,17 @@ static void	handle_dollar_quotes(t_segment *segment, t_expansion_data *data,
 	}
 }
 
+static void	safe_strjoin_inplace(char **dest, char *src)
+{
+	char	*temp;
+
+	if (!src)
+		return ;
+	temp = ft_strjoin(*dest, src);
+	free(*dest);
+	*dest = temp;
+}
+
 // ok
 /// @brief process $var in a segment. checks if previous char is invalid
 // loops til end of var, extracts it, get val value, cpys it
@@ -76,15 +61,11 @@ static void	handle_dollar_variable(t_segment *segment, t_expansion_data *data)
 {
 	char	*var_name;
 	char	*env_value;
-	char	*temp;
 
-	if (segment->value[*data->i] == '\0' || segment->value[*data->i] == ' '
-		|| segment->value[*data->i] == '\t' || segment->value[*data->i] == '\n'
-		|| segment->value[*data->i] == '"' || segment->value[*data->i] == '\'')
+	if (segment->value[*data->i] == '\0' || ft_strchr(" \t\n'\"",
+			segment->value[*data->i]))
 	{
-		temp = ft_strjoin(*data->final_str, "$");
-		free(*data->final_str);
-		*data->final_str = temp;
+		safe_strjoin_inplace(data->final_str, "$");
 	}
 	else
 	{
@@ -94,14 +75,8 @@ static void	handle_dollar_variable(t_segment *segment, t_expansion_data *data)
 		var_name = ft_substr(segment->value, *data->start, *data->i
 				- *data->start);
 		env_value = get_env_value(data->ctx->env, var_name);
-
-		if (env_value)
-		{
-			temp = ft_strjoin(*data->final_str, env_value);
-			free(*data->final_str);
-			*data->final_str = temp;
-			free(var_name);
-		}
+		safe_strjoin_inplace(data->final_str, env_value);
+		free(var_name);
 		free(env_value);
 	}
 }
@@ -111,26 +86,27 @@ static void	handle_dollar_variable(t_segment *segment, t_expansion_data *data)
 // adds text before, skips $, identifies ?, '' or ""
 /// @param segment
 /// @param data
+static void	append_and_free(char **dest, char *temp_src)
+{
+	char	*new_str;
+
+	if (!temp_src)
+		return ;
+	new_str = ft_strjoin(*dest, temp_src);
+	free(*dest);
+	*dest = new_str;
+	free(temp_src);
+}
+
 void	handle_dollar_expansion(t_segment *segment, t_expansion_data *data)
 {
-	char	*remaining;
-	char	*temp;
-
-	remaining = ft_substr(segment->value, *data->start, *data->i
-			- *data->start);
-	temp = ft_strjoin(*data->final_str, remaining);
-	free(*data->final_str);
-	*data->final_str = temp;
-	free(remaining);
+	append_and_free(data->final_str, ft_substr(segment->value, *data->start,
+			*data->i - *data->start));
 	(*data->i)++;
 	*data->start = *data->i;
 	if (segment->value[*data->i] == '?')
 	{
-		remaining = get_exit_code(data->ctx);
-		temp = ft_strjoin(*data->final_str, remaining);
-		free(*data->final_str);
-		*data->final_str = temp;
-		free(remaining);
+		append_and_free(data->final_str, get_exit_code(data->ctx));
 		(*data->i)++;
 	}
 	else if (segment->value[*data->i] == '"')

@@ -6,11 +6,13 @@
 /*   By: tdietz-r <tdietz-r@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 03:56:15 by majkijew          #+#    #+#             */
-/*   Updated: 2025/10/05 14:03:13 by tdietz-r         ###   ########.fr       */
+/*   Updated: 2025/10/05 23:16:15 by tdietz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/minishell.h"
+
+volatile sig_atomic_t	g_heredoc_abort = 0;
 
 /// Ctrl-C
 /// @brief 	rl_on_new_line() - reset readlines internal state
@@ -27,16 +29,7 @@ static void	sigint_handler(int sig)
 	rl_redisplay();
 }
 
-/// Ctrl-\ used to quit and dump core
-/// i think its more usefull in child than parent idk i just dont use it
-// normally
 /// @param sig
-static void	sigquit_handler(int sig)
-{
-	(void)sig;
-	write(1, "Quit: 3\n", 8);
-}
-
 /// @brief used in heredocs only no redisplay no prompt just abort heredoc
 /// @param sig
 static void	handle_heredoc_sigint(int sig)
@@ -46,10 +39,14 @@ static void	handle_heredoc_sigint(int sig)
 	exit(130);
 }
 
+/// Ctrl-\ used to quit and dump core
+/// i think its more usefull in child than parent idk i just dont use it
+// normally
+
 void	start_signals(void)
 {
 	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, sigquit_handler);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 void	setup_heredoc_and_child_sig(int is_heredoc)

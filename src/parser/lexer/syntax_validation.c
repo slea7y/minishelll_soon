@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_validation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: tdietz-r <tdietz-r@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 18:36:09 by tdietztp          #+#    #+#             */
-/*   Updated: 2025/10/05 19:03:19 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/10/05 22:38:28 by tdietz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,35 +107,42 @@ bool	validate_redirection_end(t_token_list *tokens)
 	return (true);
 }
 
+bool	validate_invalid_chars(t_token_list *tokens)
+{
+	(void) tokens;
+	return (true);
+}
+
 /// @brief chekcs if token is a single char with ~ or /
 /// @param tokens
 /// @return
-bool	validate_invalid_chars(t_token_list *tokens) ///SOMETHING TO THINK ABOUT WE PASS MORE WITHOUT IT 
-{
-	(void)tokens;
-	// t_token	*current;
+// bool	validate_invalid_chars(t_token_list *tokens)
+		///SOMETHING TO THINK ABOUT WE PASS MORE WITHOUT IT
+// {
+// 	(void)tokens;
+// t_token	*current;
 
-	// if (!tokens || !tokens->head)
-	// 	return (false);
-	// current = tokens->head;
-	// while (current)
-	// {
-	// 	if (current->token == TOKEN_WORD)
-	// 	{
-	// 		if (current->value && (ft_strncmp(current->value, "~", 2) == 0
-	// 				|| ft_strncmp(current->value, "/", 2) == 0))
-	// 		{
-	// 			ft_putstr_fd("minishell: syntax error near unexpected token \'",
-	// 				2);
-	// 			ft_putstr_fd(current->value, 2);
-	// 			ft_putstr_fd("\'\n", 2);
-	// 			return (false);
-	// 		}
-	// 	}
-	// 	current = current->next;
-	// }
-	return (true);
-}
+// if (!tokens || !tokens->head)
+// 	return (false);
+// current = tokens->head;
+// while (current)
+// {
+// 	if (current->token == TOKEN_WORD)
+// 	{
+// 		if (current->value && (ft_strncmp(current->value, "~", 2) == 0
+// 				|| ft_strncmp(current->value, "/", 2) == 0))
+// 		{
+// 			ft_putstr_fd("minishell: syntax error near unexpected token \'",
+// 				2);
+// 			ft_putstr_fd(current->value, 2);
+// 			ft_putstr_fd("\'\n", 2);
+// 			return (false);
+// 		}
+// 	}
+// 	current = current->next;
+// }
+// 	return (true);
+// }
 
 /// @brief line was a bit to long lol. just prints a message
 /// @param

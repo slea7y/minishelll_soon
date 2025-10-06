@@ -6,7 +6,7 @@
 /*   By: tdietz-r <tdietz-r@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 17:25:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/10/05 14:07:09 by tdietz-r         ###   ########.fr       */
+/*   Updated: 2025/10/05 22:37:39 by tdietz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,17 @@ void	free_env_list(t_env_list *env_list)
 	env_list->head = NULL;
 	env_list->tail = NULL;
 	env_list->size = 0;
+}
+
+int	handle_parser_error(t_cmd_list *cmds, t_token_list *tokens, char *input,
+		t_shell_ctx *ctx)
+{
+	ctx->last_exit_code = 2;
+	if (cmds)
+		free_cmd_list(cmds);
+	if (tokens)
+		free_token_list(tokens);
+	if (input)
+		free(input);
+	return (1);
 }

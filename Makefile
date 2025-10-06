@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tdietz-r <tdietz-r@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/20 22:35:15 by majkijew          #+#    #+#              #
-#    Updated: 2025/10/05 09:00:04 by tdietz-r         ###   ########.fr        #
+#    Updated: 2025/10/06 01:35:59 by majkijew         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRC = main.c cleanup.c\
 		src/execution/builtins/builtin_cd.c\
 		src/execution/builtins/builtin_commands.c\
 		src/execution/builtins/builtin_unset.c\
+		src/execution/builtins/builtin_env.c\
 		src/execution/builtins/bulitin_export.c\
 		src/execution/builtins/cd_utils.c\
 		src/execution/builtins/export_utils.c\

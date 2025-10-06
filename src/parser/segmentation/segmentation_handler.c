@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   segmentation_handler.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: tdietz-r <tdietz-r@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 20:25:22 by tdietz-r          #+#    #+#             */
-/*   Updated: 2025/10/05 11:54:42 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/10/05 22:46:57 by tdietz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,6 @@ void	assemble_final_token(t_token *token)
 	}
 	free(token->value);
 	token->value = new_value;
-}
-
-// ok
-/// @brief checks if value should be processesd depedning if its in "" or ""
-/// @param segment
- void	process_escape_sequences_in_segment(t_segment *segment)
-{
-	char	*processed;
-	char	*temp;
-
-	if (!segment || !segment->value)
-		return ;
-	if (segment->type == SEG_NORMAL_QUOTE)
-	{
-		processed = process_escape_sequences(segment->value);
-		if (processed)
-		{
-			temp = segment->value;
-			segment->value = processed;
-			free(temp);
-		}
-	}
 }
 
 // ok
@@ -123,14 +101,24 @@ char	*expand_string_variables(char *line, t_shell_ctx *ctx)
 	return (result);
 }
 
+static void	create_final_segment(t_token *token, int start, int len)
+{
+	char	*temp;
+
+	if (len <= 0)
+		return ;
+	temp = ft_substr(token->value, start, len);
+	add_segment_to_token(token, temp, SEG_NORMAL_QUOTE);
+	free(temp);
+}
+
 // ok
 /// @brief control lfction loops through token to call handler
 /// @param token
 void	dissect_token(t_token *token)
 {
-	int		i;
-	int		start;
-	char	*temp;
+	int	i;
+	int	start;
 
 	if (!token || !token->value)
 		return ;
@@ -148,11 +136,5 @@ void	dissect_token(t_token *token)
 		else
 			i++;
 	}
-	if (i > start)
-	{	
-		temp = ft_substr(token->value, start, i - start);
-		add_segment_to_token(token, temp,
-			SEG_NORMAL_QUOTE);
-		free(temp);
-	}
+	create_final_segment(token, start, i - start);
 }

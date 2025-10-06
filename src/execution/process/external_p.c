@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 22:26:59 by majkijew          #+#    #+#             */
-/*   Updated: 2025/10/05 03:21:20 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/10/06 02:01:50 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,10 @@ void	handle_external_child(t_cmd_node *cmd, char **envp, t_shell_ctx *ctx)
 		free_env(envp);
 		exit (1);
 	}
-	exit_code = execute_cmd(cmd, envp, ctx->env);
+	if (cmd->cmd && cmd->cmd[0])
+		exit_code = execute_cmd(cmd, envp, ctx->env);
+	else
+		exit_code = 0;
 	free_env(envp);
 	exit(exit_code);
 }
@@ -121,7 +124,7 @@ int	execute_single_external(t_cmd_node *cmd, t_shell_ctx *ctx)
 	char	**envp;
 	int		exit_code;
 
-	if (!cmd || !ctx || !cmd->cmd[0])
+	if (!cmd || !ctx)
 		return (1);
 	envp = env_to_array(ctx->env);
 	if (!envp)

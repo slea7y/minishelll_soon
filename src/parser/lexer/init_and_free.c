@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_and_free.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: tdietz-r <tdietz-r@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 18:09:10 by tdietz-r          #+#    #+#             */
-/*   Updated: 2025/10/05 18:18:08 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/10/05 22:40:44 by tdietz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	free_token_list(t_token_list *tokens)
 		free(current);
 		current = next;
 	}
-
 	free(tokens->prompt);
 	free(tokens);
 }

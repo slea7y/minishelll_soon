@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdietz-r <tdietz-r@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 14:00:26 by tdietz-r          #+#    #+#             */
-/*   Updated: 2025/10/05 14:07:23 by tdietz-r         ###   ########.fr       */
+/*   Updated: 2025/10/05 22:36:29 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ typedef enum REDIR_TYPE
 // signals.c - Start
 void					start_signals(void);
 void					setup_heredoc_and_child_sig(int is_heredoc);
-
+extern volatile sig_atomic_t	g_heredoc_abort;
 // signals.c - End
 
 /// cleanup functions

@@ -3,18 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: tdietz-r <tdietz-r@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 18:20:19 by majkijew          #+#    #+#             */
-/*   Updated: 2025/10/05 03:10:39 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/10/05 22:39:28 by tdietz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../Includes/minishell.h"
 #include "../../../Includes/executor.h"
+#include "../../../Includes/minishell.h"
 #include "../../../Includes/parser.h"
 
-static int	handle_input_redir(t_file_node	*file)
+void	rewrite_heredoc_nodes(t_cmd_node *cmd, t_file_node *last_hd,
+		char *temp_filname)
+{
+	t_file_node	*iter;
+
+	if (!cmd || !last_hd || !temp_filname)
+		return ;
+	iter = cmd->files->head;
+	while (iter)
+	{
+		if (iter->redir_type == HEREDOC)
+		{
+			iter->redir_type = INFILE;
+			if (iter != last_hd)
+				iter->filename = ft_strdup("/dev/null");
+			else
+				iter->filename = temp_filname;
+		}
+		iter = iter->next;
+	}
+}
+
+static int	handle_input_redir(t_file_node *file)
 {
 	int	fd;
 
@@ -32,7 +54,7 @@ static int	handle_input_redir(t_file_node	*file)
 	return (0);
 }
 
-static int	handle_output_redir(t_file_node	*file)
+static int	handle_output_redir(t_file_node *file)
 {
 	int	fd;
 
@@ -50,7 +72,7 @@ static int	handle_output_redir(t_file_node	*file)
 	return (0);
 }
 
-static int	handle_append_redir(t_file_node	*file)
+static int	handle_append_redir(t_file_node *file)
 {
 	int	fd;
 
@@ -66,7 +88,7 @@ static int	handle_append_redir(t_file_node	*file)
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
 	return (0);
-}	
+}
 
 int	handle_redirections(t_cmd_node *cmd)
 {

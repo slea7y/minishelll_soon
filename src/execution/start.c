@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:34:07 by majkijew          #+#    #+#             */
-/*   Updated: 2025/10/05 02:35:55 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/10/06 02:05:39 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,9 @@ int	is_bulidin(char *cmd)
 	if (!cmd)
 		return (0);
 	else
-		return (ft_strcmp(cmd, "exit") == 0
-			|| ft_strcmp(cmd, "echo") == 0
-			|| ft_strcmp(cmd, "env") == 0
-			|| ft_strcmp(cmd, "export") == 0
-			|| ft_strcmp(cmd, "cd") == 0
-			|| ft_strcmp(cmd, "unset") == 0
+		return (ft_strcmp(cmd, "exit") == 0 || ft_strcmp(cmd, "echo") == 0
+			|| ft_strcmp(cmd, "env") == 0 || ft_strcmp(cmd, "export") == 0
+			|| ft_strcmp(cmd, "cd") == 0 || ft_strcmp(cmd, "unset") == 0
 			|| ft_strcmp(cmd, "pwd") == 0);
 }
 
@@ -51,7 +48,7 @@ int	execute_bulidins(t_cmd_node *cmd, t_shell_ctx *ctx)
 	return (exit_code);
 }
 
-int	detect_pipes(t_cmd_list	*cmds)
+int	detect_pipes(t_cmd_list *cmds)
 {
 	t_cmd_node	*current;
 
@@ -84,8 +81,8 @@ static int	execute_single_command(t_cmd_node *current, t_shell_ctx *ctx)
 		exit_code = execute_single_external(current, ctx);
 	else
 	{
-		if (handle_redirections(current) != 0)
-			exit_code = 1;
+		if (current->files && current->files->head)
+			exit_code = execute_single_external(current, ctx);
 		else
 			exit_code = 0;
 	}

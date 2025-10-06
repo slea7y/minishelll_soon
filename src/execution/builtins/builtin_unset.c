@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/08 21:57:51 by majkijew          #+#    #+#             */
-/*   Updated: 2025/10/05 05:07:44 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/10/06 01:40:34 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 #include "../../../Includes/minishell.h"
 #include "../../../libft/libft.h"
 
-static void	remove_node(t_env_node *current, t_env_node *prev, t_env_list *env)
+static void	remove_node(t_env_node *node_to_remove,
+		t_env_node *prev, t_env_list *env)
 {
 	if (prev == NULL)
-		env->head = current->next;
+		env->head = node_to_remove->next;
 	else
-		prev->next = current->next;
-	if (env->tail == current)
+		prev->next = node_to_remove->next;
+	if (env->tail == node_to_remove)
 		env->tail = prev;
-	free(current->key);
-	free(current->value);
-	free(current);
+	free(node_to_remove->key);
+	free(node_to_remove->value);
+	free(node_to_remove);
 	env->size--;
 }
 
@@ -32,6 +33,7 @@ void	remove_env_var(char *key, t_env_list *env)
 {
 	t_env_node	*current;
 	t_env_node	*prev;
+	t_env_node	*to_remove;
 
 	if (!key || !env || !env->head)
 		return ;
@@ -41,11 +43,15 @@ void	remove_env_var(char *key, t_env_list *env)
 	{
 		if (ft_strcmp(current->key, key) == 0)
 		{
-			remove_node(current, prev, env);
-			return ;
+			to_remove = current;
+			current = current->next;
+			remove_node(to_remove, prev, env);
 		}
-		prev = current;
-		current = current->next;
+		else
+		{
+			prev = current;
+			current = current->next;
+		}
 	}
 }
 
@@ -63,11 +69,7 @@ int	ft_unset(t_cmd_node *cmd, t_shell_ctx *ctx)
 	while (cmd->cmd[i])
 	{
 		if (!is_valid_identifier(cmd->cmd[i]))
-		{
-			ft_putstr_fd(cmd->cmd[i], 2);
-			ft_putstr_fd(" : not a valid identifier\n", 2);
-			exit_code = 1;
-		}
+			exit_code = 0;
 		else
 			remove_env_var(cmd->cmd[i], ctx->env);
 		i++;

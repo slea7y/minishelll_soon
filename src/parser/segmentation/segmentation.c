@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   segmentation.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: tdietz-r <tdietz-r@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 08:34:01 by majkijew          #+#    #+#             */
-/*   Updated: 2025/10/05 12:32:44 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/10/05 22:41:01 by tdietz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,7 @@ void	handle_quotes(t_token *token, int *i, int *start)
 		free(temp);
 	}
 	quote_char = token->value[*i];
-	*start = *i + 1;
-	(*i)++;
+	*start = ++(*i);
 	while (token->value[*i] && token->value[*i] != quote_char)
 		(*i)++;
 	if (*i > *start)

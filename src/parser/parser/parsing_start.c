@@ -6,7 +6,7 @@
 /*   By: tdietz-r <tdietz-r@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 05:23:00 by majkijew          #+#    #+#             */
-/*   Updated: 2025/10/05 14:03:29 by tdietz-r         ###   ########.fr       */
+/*   Updated: 2025/10/05 22:21:53 by tdietz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	populate_heredoc_node(t_file_node *file, t_token *next,
 {
 	file->redir_type = HEREDOC;
 	file->filename = ft_strdup(next->value);
-	file->delimiter_quoted = is_delimiter_quoted_in_original_input(original_input,
+	file->delimiter_quoted = is_del_qu_in_org_input(original_input,
 			next->value);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tdietz-r <tdietz-r@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 19:21:56 by tdietz-r          #+#    #+#             */
-/*   Updated: 2025/10/05 14:06:57 by tdietz-r         ###   ########.fr       */
+/*   Updated: 2025/10/05 23:32:12 by tdietz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # include <string.h>
 # include <unistd.h>
 
-typedef struct s_token			t_file_listt_token;
+typedef struct s_token			t_file_list_t_token;
 typedef struct s_segment		t_segment;
 typedef struct s_segment_list	t_segment_list;
 typedef struct s_token_list		t_token_list;
@@ -239,7 +239,7 @@ int								write_line_to_file(int fd, char *line,
 void							add_redirection(t_cmd_node *cmd_node,
 									t_token *token, t_token *next,
 									char *original_input);
-int								is_delimiter_quoted_in_original_input(char *original_input,
+int								is_del_qu_in_org_input(char *original_input,
 									char *delimiter);
 void							handle_dollar_quotes_seg(t_token *token, int *i,
 									int *start);
@@ -249,7 +249,7 @@ void							handle_dollar_vars(t_token *token, int *i,
 									int *start);
 void							handle_tilde_expansion(t_segment *segment,
 									t_expansion_data *data);
-void							process_escape_sequences_in_segment(t_segment *segment);
+void							process_escape_seq_in_seg(t_segment *segment);
 t_file_list						*init_file_list_if_needed(t_cmd_node *cmd_node);
 
 void							free_token_list(t_token_list *tokens);
